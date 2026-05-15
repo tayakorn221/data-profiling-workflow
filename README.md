@@ -126,6 +126,7 @@ flowchart LR
 
 ## เอกสาร · Documentation
 
+- 🚀 **[Quickstart — สำหรับผู้เริ่มต้น](docs/quickstart.md)** — step-by-step ตั้งแต่ติดตั้ง Python จนถึง paste prompt ใส่ Claude (สำหรับคนที่ไม่เคยใช้ PowerShell/Git มาก่อน)
 - **[Tutorial ฉบับเต็ม (ภาษาไทย)](docs/tutorial.md)** — อธิบายแนวคิด PDPA, k-anonymity, การใช้ DuckDB, การส่งผลให้ AI
 - **[Glossary — Business Rules](docs/glossary.md)** — status codes, faculty mappings, date conventions (institutional knowledge)
 - **[Prompt Templates](prompts/README.md)** — system prompt, context pack, task templates สำหรับใช้กับ Claude/ChatGPT
