@@ -1,0 +1,70 @@
+# --- Raw data (PDPA: ห้าม commit) ---
+data/
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.parquet
+
+# --- Pipeline outputs ---
+outputs/
+outputs/*.json
+outputs/*.html
+outputs/*.txt
+
+# --- Whitelist: synthetic examples ที่ตรวจแล้วว่าไม่มี PII ---
+!examples/sample_*
+!examples/sample_*.json
+!examples/sample_*.html
+!docs/tutorial.docx
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Secrets / env ---
+.env
+.env.local
+*.pem
+*.key
+
+# --- IDE / editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb
+
+# --- Pytest / coverage ---
+.pytest_cache/
+.coverage
+htmlcov/

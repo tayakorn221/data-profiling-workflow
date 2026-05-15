@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Quality Scorecard — raw_data</title>
+  <style>
+    body {
+      font-family: 'Sarabun', 'Segoe UI', system-ui, sans-serif;
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+      color: #333;
+      line-height: 1.5;
+    }
+    h1 { color: #1F4E79; border-bottom: 3px solid #1F4E79; padding-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th { background: #1F4E79; color: white; padding: 10px; text-align: left; }
+    td { padding: 8px 10px; border-bottom: 1px solid #ddd; }
+    tr:nth-child(even) { background: #F4F8FB; }
+    .meta { background: #FFF4CE; padding: 12px; border-radius: 4px; margin: 15px 0; }
+    .legend { font-size: 0.9em; color: #666; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Data Quality Scorecard</h1>
+  <div class="meta">
+    <b>ตาราง:</b> raw_data<br>
+    <b>วันที่:</b> 2026-05-15 08:48<br>
+    <b>จำนวน:</b> 12,500 แถว × 14 คอลัมน์
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>คอลัมน์</th><th>ชนิด</th><th>Profile Kind</th>
+        <th>Null %</th><th>Unique</th><th>เกรด</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>STUDENT_CODE</td>
+      <td>VARCHAR</td>
+      <td>high_cardinality</td>
+      <td>0.0%</td>
+      <td>12,500</td>
+      <td style="color:#2E7D32;font-weight:bold">A (100.0%)</td>
+    </tr>
+    <tr>
+      <td>FACULTY_NAME_TH</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.0%</td>
+      <td>6</td>
+      <td style="color:#2E7D32;font-weight:bold">A (100.0%)</td>
+    </tr>
+    <tr>
+      <td>DEPARTMENT_NAME_TH</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.1%</td>
+      <td>24</td>
+      <td style="color:#2E7D32;font-weight:bold">A (99.9%)</td>
+    </tr>
+    <tr>
+      <td>PROGRAM_LEVEL</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.0%</td>
+      <td>3</td>
+      <td style="color:#2E7D32;font-weight:bold">A (100.0%)</td>
+    </tr>
+    <tr>
+      <td>ADMIT_ACAD_YEAR</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.0%</td>
+      <td>8</td>
+      <td style="color:#2E7D32;font-weight:bold">A (100.0%)</td>
+    </tr>
+    <tr>
+      <td>STUDENT_YEAR</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.36%</td>
+      <td>7</td>
+      <td style="color:#2E7D32;font-weight:bold">A (99.6%)</td>
+    </tr>
+    <tr>
+      <td>STUDENT_STATUS_NAME</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.0%</td>
+      <td>4</td>
+      <td style="color:#2E7D32;font-weight:bold">A (100.0%)</td>
+    </tr>
+    <tr>
+      <td>REGIS_STATUS</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.0%</td>
+      <td>2</td>
+      <td style="color:#2E7D32;font-weight:bold">A (100.0%)</td>
+    </tr>
+    <tr>
+      <td>GENDER</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.18%</td>
+      <td>3</td>
+      <td style="color:#2E7D32;font-weight:bold">A (99.8%)</td>
+    </tr>
+    <tr>
+      <td>GPA</td>
+      <td>VARCHAR</td>
+      <td>numeric</td>
+      <td>14.8%</td>
+      <td>312</td>
+      <td style="color:#558B2F;font-weight:bold">B (85.2%)</td>
+    </tr>
+    <tr>
+      <td>EMAIL</td>
+      <td>VARCHAR</td>
+      <td>high_cardinality</td>
+      <td>1.04%</td>
+      <td>12,368</td>
+      <td style="color:#2E7D32;font-weight:bold">A (99.0%)</td>
+    </tr>
+    <tr>
+      <td>PHONE</td>
+      <td>VARCHAR</td>
+      <td>high_cardinality</td>
+      <td>1.76%</td>
+      <td>12,275</td>
+      <td style="color:#2E7D32;font-weight:bold">A (98.2%)</td>
+    </tr>
+    <tr>
+      <td>CITIZEN_ID</td>
+      <td>VARCHAR</td>
+      <td>high_cardinality</td>
+      <td>0.04%</td>
+      <td>12,495</td>
+      <td style="color:#2E7D32;font-weight:bold">A (100.0%)</td>
+    </tr>
+    <tr>
+      <td>EXPORTDATE</td>
+      <td>VARCHAR</td>
+      <td>categorical</td>
+      <td>0.0%</td>
+      <td>1</td>
+      <td style="color:#2E7D32;font-weight:bold">A (100.0%)</td>
+    </tr>
+    </tbody>
+  </table>
+  <p class="legend">
+    เกรดคำนวณจาก completeness (100% − null%) — A ≥ 95, B ≥ 85, C ≥ 70, D ≥ 50, F &lt; 50
+  </p>
+</body>
+</html>

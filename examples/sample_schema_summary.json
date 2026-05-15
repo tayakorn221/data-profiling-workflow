@@ -1,0 +1,157 @@
+{
+  "table_name": "raw_data",
+  "extracted_at": "2026-05-15T10:30:00",
+  "total_rows": 12500,
+  "total_columns": 14,
+  "suppress_threshold": 5,
+  "_note": "SYNTHETIC EXAMPLE — ค่าทั้งหมดในไฟล์นี้สังเคราะห์ขึ้น ไม่ใช่ข้อมูลจริงของนักศึกษา ใช้สำหรับสาธิตรูปแบบ output เท่านั้น",
+  "columns": [
+    {
+      "name": "STUDENT_CODE",
+      "type": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 12500
+    },
+    {
+      "name": "FACULTY_NAME_TH",
+      "type": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 6,
+      "top_values": [
+        {"value": "คณะตัวอย่างที่หนึ่ง", "count": 4200},
+        {"value": "คณะตัวอย่างที่สอง", "count": 3100},
+        {"value": "คณะตัวอย่างที่สาม", "count": 2400},
+        {"value": "คณะตัวอย่างที่สี่", "count": 1500},
+        {"value": "คณะตัวอย่างที่ห้า", "count": 950}
+      ]
+    },
+    {
+      "name": "DEPARTMENT_NAME_TH",
+      "type": "VARCHAR",
+      "null_count": 12,
+      "null_pct": 0.1,
+      "unique_count": 24,
+      "top_values": [
+        {"value": "ภาควิชาตัวอย่าง A", "count": 1800},
+        {"value": "ภาควิชาตัวอย่าง B", "count": 1500},
+        {"value": "ภาควิชาตัวอย่าง C", "count": 1200},
+        {"value": "ภาควิชาตัวอย่าง D", "count": 950},
+        {"value": "ภาควิชาตัวอย่าง E", "count": 800}
+      ]
+    },
+    {
+      "name": "PROGRAM_LEVEL",
+      "type": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "top_values": [
+        {"value": "ปริญญาตรี", "count": 10200},
+        {"value": "ปริญญาโท", "count": 1800},
+        {"value": "ปริญญาเอก", "count": 500}
+      ]
+    },
+    {
+      "name": "ADMIT_ACAD_YEAR",
+      "type": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 8,
+      "top_values": [
+        {"value": "2566", "count": 2100},
+        {"value": "2565", "count": 1900},
+        {"value": "2564", "count": 1700},
+        {"value": "2563", "count": 1600},
+        {"value": "2562", "count": 1450}
+      ]
+    },
+    {
+      "name": "STUDENT_YEAR",
+      "type": "VARCHAR",
+      "null_count": 45,
+      "null_pct": 0.36,
+      "unique_count": 7,
+      "top_values": [
+        {"value": "1", "count": 2200},
+        {"value": "2", "count": 2050},
+        {"value": "3", "count": 1850},
+        {"value": "4", "count": 1700}
+      ]
+    },
+    {
+      "name": "STUDENT_STATUS_NAME",
+      "type": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 4,
+      "top_values": [
+        {"value": "ปกติ", "count": 9800},
+        {"value": "พักการศึกษา", "count": 410},
+        {"value": "พ้นสภาพ", "count": 980},
+        {"value": "สำเร็จการศึกษา", "count": 1310}
+      ]
+    },
+    {
+      "name": "REGIS_STATUS",
+      "type": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "top_values": [
+        {"value": "Y", "count": 10210},
+        {"value": "N", "count": 2290}
+      ]
+    },
+    {
+      "name": "GENDER",
+      "type": "VARCHAR",
+      "null_count": 22,
+      "null_pct": 0.18,
+      "unique_count": 3,
+      "top_values": [
+        {"value": "M", "count": 7100},
+        {"value": "F", "count": 5350}
+      ]
+    },
+    {
+      "name": "GPA",
+      "type": "VARCHAR",
+      "null_count": 1850,
+      "null_pct": 14.8,
+      "unique_count": 312
+    },
+    {
+      "name": "EMAIL",
+      "type": "VARCHAR",
+      "null_count": 130,
+      "null_pct": 1.04,
+      "unique_count": 12368
+    },
+    {
+      "name": "PHONE",
+      "type": "VARCHAR",
+      "null_count": 220,
+      "null_pct": 1.76,
+      "unique_count": 12275
+    },
+    {
+      "name": "CITIZEN_ID",
+      "type": "VARCHAR",
+      "null_count": 5,
+      "null_pct": 0.04,
+      "unique_count": 12495
+    },
+    {
+      "name": "EXPORTDATE",
+      "type": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "top_values": [
+        {"value": "45000", "count": 12500}
+      ]
+    }
+  ]
+}
