@@ -29,7 +29,23 @@ repo นี้สร้าง **สิ่งทดแทนข้อมูลด
 
 ## Quick Start
 
-ติดตั้งและรันทั้ง pipeline ใน 4 คำสั่ง:
+วาง `your_file.xlsx` ที่ `data/` ก่อน (โฟลเดอร์นี้อยู่ใน `.gitignore` แล้ว)
+
+**บน Linux / macOS / Git Bash:**
+
+```bash
+make install        # ติดตั้ง dependencies
+make all            # รัน pipeline ทั้งสาย (schema → scan → profile → scorecard)
+```
+
+**บน Windows PowerShell:**
+
+```powershell
+.\make.ps1 install
+.\make.ps1 all
+```
+
+**หรือรันทีละขั้นแบบ verbose:**
 
 ```bash
 pip install -r requirements.txt
@@ -38,8 +54,6 @@ python scripts/02_scan_pii.py       --input outputs/schema.json --report outputs
 python scripts/03_profile_stats.py  --input data/your_file.xlsx --output outputs/profile.json
 python scripts/04_build_scorecard.py --schema outputs/schema.json --profile outputs/profile.json --output outputs/scorecard.html
 ```
-
-> **หมายเหตุ:** วาง `your_file.xlsx` ไว้ที่ `data/` ก่อน — โฟลเดอร์นี้อยู่ใน `.gitignore` แล้ว ป้องกัน commit เผลอ
 
 ---
 
@@ -77,17 +91,27 @@ flowchart LR
 .
 ├── README.md                            # ไฟล์นี้
 ├── LICENSE                              # MIT
+├── Makefile / make.ps1                  # one-command pipeline runner
 ├── requirements.txt                     # duckdb, pandas, openpyxl
 ├── .gitignore                           # block data/, *.xlsx, *.csv
 ├── docs/
 │   ├── tutorial.md                      # tutorial ฉบับเต็ม (ภาษาไทย)
 │   ├── tutorial.docx                    # ต้นฉบับสำหรับ download
-│   └── images/                          # screenshots (ถ้ามี)
+│   ├── glossary.md                      # business rules + status codes
+│   └── images/
 ├── scripts/
 │   ├── 01_extract_schema.py             # → schema_summary.json
 │   ├── 02_scan_pii.py                   # → pii_report.txt
 │   ├── 03_profile_stats.py              # → profile_stats.json
 │   └── 04_build_scorecard.py            # → scorecard.html
+├── prompts/                             # ← reusable AI prompts
+│   ├── README.md                        # workflow + maintenance guide
+│   ├── system_prompt.md                 # baseline system prompt
+│   ├── context_pack.template.md         # bundle schema+profile+rules
+│   └── tasks/
+│       ├── sql_generation.md            # ขอ SQL จาก AI
+│       ├── data_exploration.md          # ขอ ideas
+│       └── verify_query.md              # ตรวจ SQL ก่อนรัน
 ├── examples/
 │   ├── sample_schema_summary.json       # ตัวอย่าง output (synthetic)
 │   └── sample_data_quality_scorecard.html
@@ -103,6 +127,8 @@ flowchart LR
 ## เอกสาร · Documentation
 
 - **[Tutorial ฉบับเต็ม (ภาษาไทย)](docs/tutorial.md)** — อธิบายแนวคิด PDPA, k-anonymity, การใช้ DuckDB, การส่งผลให้ AI
+- **[Glossary — Business Rules](docs/glossary.md)** — status codes, faculty mappings, date conventions (institutional knowledge)
+- **[Prompt Templates](prompts/README.md)** — system prompt, context pack, task templates สำหรับใช้กับ Claude/ChatGPT
 - **[ต้นฉบับ .docx](docs/tutorial.docx)** — สำหรับ download ไปอ่าน offline
 
 ---

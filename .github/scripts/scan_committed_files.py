@@ -34,6 +34,7 @@ SKIP_EXTENSIONS = {
 SCAN_EXTENSIONS = {
     ".md", ".json", ".yaml", ".yml", ".txt", ".py", ".sql",
     ".html", ".csv", ".tsv", ".ini", ".cfg", ".toml",
+    ".ps1", ".sh", ".bat", ".cmd",
 }
 
 PII_PATTERNS: dict[str, re.Pattern[str]] = {
