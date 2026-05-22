@@ -30,16 +30,24 @@ def _profile_numeric(
     """พยายาม cast เป็น DOUBLE แล้วคำนวณสถิติ ถ้าไม่ได้คืน None"""
     row = con.execute(
         f'''
+        WITH numeric_values AS (
+            SELECT TRY_CAST("{col}" AS DOUBLE) AS val
+            FROM "{table}"
+        ),
+        finite_values AS (
+            SELECT val
+            FROM numeric_values
+            WHERE isfinite(val)
+        )
         SELECT
-            MIN(TRY_CAST("{col}" AS DOUBLE)) AS min_v,
-            MAX(TRY_CAST("{col}" AS DOUBLE)) AS max_v,
-            AVG(TRY_CAST("{col}" AS DOUBLE)) AS mean_v,
-            MEDIAN(TRY_CAST("{col}" AS DOUBLE)) AS median_v,
-            STDDEV(TRY_CAST("{col}" AS DOUBLE)) AS std_v,
-            QUANTILE_CONT(TRY_CAST("{col}" AS DOUBLE), 0.25) AS p25,
-            QUANTILE_CONT(TRY_CAST("{col}" AS DOUBLE), 0.75) AS p75
-        FROM "{table}"
-        WHERE TRY_CAST("{col}" AS DOUBLE) IS NOT NULL
+            MIN(val) AS min_v,
+            MAX(val) AS max_v,
+            AVG(val) AS mean_v,
+            MEDIAN(val) AS median_v,
+            STDDEV(val) AS std_v,
+            QUANTILE_CONT(val, 0.25) AS p25,
+            QUANTILE_CONT(val, 0.75) AS p75
+        FROM finite_values
         '''
     ).fetchone()
 

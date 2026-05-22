@@ -34,6 +34,7 @@ param(
     [string]$InputFile = 'data\student_fixed_report.xlsx',
     [string]$OutDir = 'outputs',
     [int]$K = 5,
+    [string[]]$SensitiveColumns = @(),
     [string]$Python = 'python'
 )
 
@@ -62,6 +63,7 @@ function Show-Help {
     Write-Host "  -InputFile $InputFile"
     Write-Host "  -OutDir    $OutDir"
     Write-Host "  -K         $K"
+    Write-Host "  -SensitiveColumns FD02  (additional columns whose top values should be suppressed)"
     Write-Host ""
 }
 
@@ -77,7 +79,12 @@ function Invoke-Install {
 
 function Invoke-Schema {
     if (-not (Test-Path $InputFile)) { throw "Input file not found: $InputFile" }
-    Invoke-Script @('scripts/01_extract_schema.py', '--input', $InputFile, '--output', $schemaFile, '-k', $K)
+    $args = @('scripts/01_extract_schema.py', '--input', $InputFile, '--output', $schemaFile, '-k', $K)
+    if ($SensitiveColumns.Count -gt 0) {
+        $args += '--extra-sensitive'
+        $args += $SensitiveColumns
+    }
+    Invoke-Script $args
 }
 
 function Invoke-Scan {

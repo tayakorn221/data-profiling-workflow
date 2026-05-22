@@ -121,6 +121,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="ชื่อคอลัมน์ที่เป็น PII (override default list)",
     )
     parser.add_argument(
+        "--extra-sensitive",
+        nargs="*",
+        default=[],
+        help="ชื่อคอลัมน์เพิ่มเติมที่ต้อง suppress top values นอกเหนือจาก default list",
+    )
+    parser.add_argument(
         "--suppress-threshold", "-k",
         type=int, default=DEFAULT_SUPPRESS_THRESHOLD,
         help="k-anonymity threshold (default: 5)",
@@ -136,8 +142,11 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     sensitive = (
-        set(args.sensitive) if args.sensitive is not None else DEFAULT_SENSITIVE_COLUMNS
+        set(args.sensitive)
+        if args.sensitive is not None
+        else set(DEFAULT_SENSITIVE_COLUMNS)
     )
+    sensitive.update(args.extra_sensitive)
 
     con = duckdb.connect()
     # ใช้ all_varchar=true เพื่อหลีกเลี่ยง type inference error

@@ -21,10 +21,10 @@ import sys
 from pathlib import Path
 
 PII_PATTERNS: dict[str, re.Pattern[str]] = {
-    "thai_citizen_id": re.compile(r"\b\d{13}\b"),
-    "thai_phone": re.compile(r"\b0\d{8,9}\b"),
+    "thai_citizen_id": re.compile(r"(?<![\d.])\d{13}(?![\d.])"),
+    "thai_phone": re.compile(r"(?<![\d.])0\d{8,9}(?![\d.])"),
     "email": re.compile(r"[\w.+-]+@[\w.-]+\.\w+"),
-    "student_code": re.compile(r"\b\d{8,11}\b"),
+    "student_code": re.compile(r"(?<![\d.])\d{8,11}(?![\d.])"),
     "date_iso": re.compile(r"\d{4}-\d{2}-\d{2}"),
 }
 

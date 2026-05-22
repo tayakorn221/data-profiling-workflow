@@ -5,6 +5,8 @@ PY ?= python
 INPUT ?= data/student_fixed_report.xlsx
 OUTDIR ?= outputs
 K ?= 5
+EXTRA_SENSITIVE ?=
+EXTRA_SENSITIVE_ARGS := $(if $(strip $(EXTRA_SENSITIVE)),--extra-sensitive $(EXTRA_SENSITIVE),)
 
 SCHEMA  := $(OUTDIR)/schema_summary.json
 PROFILE := $(OUTDIR)/profile_stats.json
@@ -31,13 +33,14 @@ help:
 	@echo "  INPUT=$(INPUT)"
 	@echo "  OUTDIR=$(OUTDIR)"
 	@echo "  K=$(K)  (k-anonymity threshold)"
+	@echo "  EXTRA_SENSITIVE=$(EXTRA_SENSITIVE)  (additional columns whose top values should be suppressed)"
 	@echo ""
 
 install:
 	$(PY) -m pip install -r requirements.txt
 
 $(SCHEMA): $(INPUT)
-	$(PY) scripts/01_extract_schema.py --input $(INPUT) --output $(SCHEMA) -k $(K)
+	$(PY) scripts/01_extract_schema.py --input $(INPUT) --output $(SCHEMA) -k $(K) $(EXTRA_SENSITIVE_ARGS)
 
 $(PII): $(SCHEMA)
 	$(PY) scripts/02_scan_pii.py --input $(SCHEMA) --report $(PII) --strict
