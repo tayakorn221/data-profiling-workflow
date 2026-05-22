@@ -38,18 +38,25 @@ make install        # ติดตั้ง dependencies
 make all            # รัน pipeline ทั้งสาย (schema → scan → profile → scorecard)
 ```
 
+> ถ้าใช้ Windows PowerShell แล้วเจอ `make : The term 'make' is not recognized`
+> ให้ใช้ `.\make.ps1` ในหัวข้อถัดไปแทน ไม่ต้องติดตั้ง GNU Make เพิ่ม
+
 **บน Windows PowerShell:**
 
 ```powershell
 .\make.ps1 install
-.\make.ps1 all
+.\make.ps1 all -InputFile data\input.xlsx -SensitiveColumns FD02
 ```
+
+`-SensitiveColumns FD02` ใช้เมื่อ PII scan จับรหัสหมวดหมู่/รหัสบัญชีเป็น `student_code`
+ทั้งที่ไม่ใช่รหัสนักศึกษา โดยจะ suppress `top_values` ของคอลัมน์นั้นออกจาก
+`schema_summary.json` ก่อน scan
 
 **หรือรันทีละขั้นแบบ verbose:**
 
 ```bash
 pip install -r requirements.txt
-python scripts/01_extract_schema.py --input data/your_file.xlsx --output outputs/schema.json
+python scripts/01_extract_schema.py --input data/your_file.xlsx --output outputs/schema.json --extra-sensitive FD02
 python scripts/02_scan_pii.py       --input outputs/schema.json --report outputs/pii_report.txt --strict
 python scripts/03_profile_stats.py  --input data/your_file.xlsx --output outputs/profile.json
 python scripts/04_build_scorecard.py --schema outputs/schema.json --profile outputs/profile.json --output outputs/scorecard.html
