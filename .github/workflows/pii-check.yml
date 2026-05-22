@@ -1,0 +1,56 @@
+name: PII Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  scan-for-pii:
+    name: Scan committed files for PII patterns
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # ต้องการ history เพื่อหา diff base
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Determine changed files
+        id: changed
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+          else
+            # push event
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+            if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ]; then
+              # branch แรก หรือ force push — fallback เป็น HEAD~1
+              base="$(git rev-parse HEAD~1 2>/dev/null || git rev-list --max-parents=0 HEAD)"
+            fi
+          fi
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+          echo "head=$head" >> "$GITHUB_OUTPUT"
+
+          files=$(git diff --name-only --diff-filter=ACMRT "$base" "$head" || true)
+          echo "Changed files:"
+          echo "$files"
+          # write to a tmp file (avoid issues with multiline GITHUB_OUTPUT)
+          echo "$files" > changed_files.txt
+
+      - name: Run PII scanner
+        run: |
+          python .github/scripts/scan_committed_files.py --files-from changed_files.txt
